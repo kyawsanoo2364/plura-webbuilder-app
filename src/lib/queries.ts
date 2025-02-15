@@ -133,7 +133,7 @@ export const saveActivityLogsNotification = async ({
 export const verifyAndAcceptInvitation = async () => {
   const user = await currentUser();
   if (!user) return await auth.protect();
-  const invatationExists = await db.invitation.findUnique({
+  const invatationExists = await db.invitation.findFirst({
     where: { email: user.emailAddresses[0].emailAddress, status: "PENDING" },
   });
   if (invatationExists) {
